@@ -7,6 +7,10 @@
 image: node:16.13.0-alpine3.14
 stages:
 - test
+
+before_script:
+  - yarn install
+
 test-code-job:
   stage: test
   script:
