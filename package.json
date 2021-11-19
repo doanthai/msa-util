@@ -2,7 +2,7 @@
   "name": "msa-util",
   "version": "0.0.1",
   "description": "",
-  "author": "",
+  "author": "doanthai",
   "private": true,
   "license": "UNLICENSED",
   "main": "dist/index.js",
