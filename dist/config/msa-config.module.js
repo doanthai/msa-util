@@ -14,7 +14,9 @@ const default_configuration_1 = require("./default-configuration");
 const path = require("path");
 let MsaConfigModule = MsaConfigModule_1 = class MsaConfigModule {
     static register(options) {
-        const envFilePath = path.resolve(__dirname, options.folder, `${options.env || process.env.NODE_ENV}.env`);
+        const envFilePath = !options.isShareModule
+            ? path.resolve(__dirname, '../../../..', options.folder, `${options.env || process.env.NODE_ENV}.env`)
+            : path.resolve(__dirname, options.folder, `${options.env || process.env.NODE_ENV}.env`);
         console.log(envFilePath);
         return {
             module: MsaConfigModule_1,
