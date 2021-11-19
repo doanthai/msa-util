@@ -17,7 +17,7 @@ let MsaConfigModule = MsaConfigModule_1 = class MsaConfigModule {
         return {
             module: MsaConfigModule_1,
             imports: [
-                config_1.ConfigModule.forRoot(Object.assign(Object.assign({}, options), { load: [default_configuration_1.default], envFilePath: path.resolve(__dirname, '../..', options.folder, `${options.env || process.env.NODE_ENV}.env`) })),
+                config_1.ConfigModule.forRoot(Object.assign(Object.assign({}, options), { load: [default_configuration_1.default], envFilePath: path.resolve(__dirname, options.folder, `${options.env || process.env.NODE_ENV}.env`) })),
             ],
         };
     }

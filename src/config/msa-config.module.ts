@@ -19,7 +19,6 @@ export class MsaConfigModule {
           load: [defaultConfig],
           envFilePath: path.resolve(
             __dirname,
-            '../..',
             options.folder,
             `${options.env || process.env.NODE_ENV}.env`,
           ),

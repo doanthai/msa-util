@@ -23,7 +23,7 @@ describe('MsaConfigModule', () => {
   beforeEach(async () => {
     const moduleRef: TestingModule = await Test.createTestingModule({
       imports: [
-        MsaConfigModule.register({ folder: './env-test', env: 'test' }),
+        MsaConfigModule.register({ folder: '../../env-test', env: 'test' }),
       ],
     }).compile();
 
@@ -48,7 +48,7 @@ describe('MsaConfigModule', () => {
       imports: [
         MsaConfigModule.register({
           load: [customConfig],
-          folder: './env-test',
+          folder: '../../env-test',
           env: 'test2',
         }),
       ],
