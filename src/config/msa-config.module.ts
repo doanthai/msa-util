@@ -11,17 +11,19 @@ export interface MsaConfigModuleOptions extends ConfigModuleOptions {
 @Module({})
 export class MsaConfigModule {
   static register(options: MsaConfigModuleOptions): DynamicModule {
+    const envFilePath = path.resolve(
+      __dirname,
+      options.folder,
+      `${options.env || process.env.NODE_ENV}.env`,
+    );
+    console.log(envFilePath);
     return {
       module: MsaConfigModule,
       imports: [
         ConfigModule.forRoot({
           ...options,
           load: [defaultConfig],
-          envFilePath: path.resolve(
-            __dirname,
-            options.folder,
-            `${options.env || process.env.NODE_ENV}.env`,
-          ),
+          envFilePath,
         }),
       ],
     };
