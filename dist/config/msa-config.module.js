@@ -5,29 +5,25 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-var ConfigModule_1;
+var MsaConfigModule_1;
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ConfigModule = void 0;
+exports.MsaConfigModule = void 0;
 const common_1 = require("@nestjs/common");
-const config_service_1 = require("./config.service");
-const constants_1 = require("../constants");
-let ConfigModule = ConfigModule_1 = class ConfigModule {
+const config_1 = require("@nestjs/config");
+const default_configuration_1 = require("./default-configuration");
+const path = require("path");
+let MsaConfigModule = MsaConfigModule_1 = class MsaConfigModule {
     static register(options) {
         return {
-            module: ConfigModule_1,
-            providers: [
-                {
-                    provide: constants_1.CONFIG_OPTIONS,
-                    useValue: options,
-                },
-                config_service_1.ConfigService,
+            module: MsaConfigModule_1,
+            imports: [
+                config_1.ConfigModule.forRoot(Object.assign(Object.assign({}, options), { load: [default_configuration_1.default], envFilePath: path.resolve(__dirname, '../..', options.folder, `${options.env || process.env.NODE_ENV}.env`) })),
             ],
-            exports: [config_service_1.ConfigService],
         };
     }
 };
-ConfigModule = ConfigModule_1 = __decorate([
+MsaConfigModule = MsaConfigModule_1 = __decorate([
     (0, common_1.Module)({})
-], ConfigModule);
-exports.ConfigModule = ConfigModule;
-//# sourceMappingURL=config.module.js.map
+], MsaConfigModule);
+exports.MsaConfigModule = MsaConfigModule;
+//# sourceMappingURL=msa-config.module.js.map
