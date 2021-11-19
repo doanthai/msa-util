@@ -10,16 +10,18 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.MongoModule = void 0;
 const common_1 = require("@nestjs/common");
 const mongoose_1 = require("@nestjs/mongoose");
-const config_1 = require("../../config");
-const mongo_service_1 = require("./mongo.service");
+const config_1 = require("@nestjs/config");
 let MongoModule = MongoModule_1 = class MongoModule {
-    static register() {
+    static register(options) {
         return {
             module: MongoModule_1,
             imports: [
                 mongoose_1.MongooseModule.forRootAsync({
-                    imports: [config_1.MsaConfigModule],
-                    useExisting: mongo_service_1.MongoConfigService,
+                    imports: [config_1.ConfigModule],
+                    useFactory: async (configService) => ({
+                        uri: configService.get('MONGODB_URI'),
+                    }),
+                    inject: [config_1.ConfigService],
                 }),
             ],
         };
