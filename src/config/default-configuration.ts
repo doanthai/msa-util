@@ -18,6 +18,7 @@ export default (): DefaultEnvConfig => ({
     ssl: process.env.DATABASE_SSL === 'true',
     poolSize: +process.env.DATABASE_POOL_SIZE || 3,
     isSRV: process.env.DATABASE_IS_SRV === 'true',
+    isDebug: process.env.DATABASE_IS_DEBUG === 'true',
   },
 
   kafka: {

@@ -9,6 +9,7 @@ export interface MongoDBConfig extends EnvConfig {
     ssl?: boolean;
     poolSize?: number;
     isSRV?: boolean;
+    isDebug?: boolean;
 }
 export interface RedisConfig extends EnvConfig {
     port?: number;
