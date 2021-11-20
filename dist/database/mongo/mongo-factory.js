@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.mongoFactory = void 0;
-const mongoFactory = (configService) => {
+const mongoFactory = async (configService) => {
     const config = configService.get('database');
     let uri = `mongodb${config.isSRV ? '+srv' : ''}://`;
     if (config.user)

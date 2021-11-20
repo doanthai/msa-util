@@ -1,7 +1,7 @@
 import { ConfigService } from '@nestjs/config';
-import { DefaultEnvConfig, MongoDBConfig } from '../../config/interfaces';
+import { DefaultEnvConfig, MongoDBConfig } from '../../config';
 
-export const mongoFactory = (
+export const mongoFactory = async (
   configService: ConfigService<DefaultEnvConfig>,
 ) => {
   const config: MongoDBConfig = configService.get<MongoDBConfig>('database');
