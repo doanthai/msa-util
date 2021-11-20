@@ -1,8 +1,8 @@
-import { ConfigService } from '@nestjs/config';
 import { DefaultEnvConfig } from './interfaces';
 import { Test, TestingModule } from '@nestjs/testing';
 import { MsaConfigModule } from './msa-config.module';
 import defaultConfig from './default-configuration';
+import { ConfigService } from '@nestjs/config';
 
 interface CustomConfig extends DefaultEnvConfig {
   customVar: string;
@@ -41,6 +41,7 @@ describe('MsaConfigModule', () => {
 
   it('service should read config', () => {
     expect(service.get<number>('port')).toBe(1234);
+    expect(service.get<string>('database.host')).toBe('localhost:27017');
   });
 
   it('dont read custom var', () => {
@@ -61,6 +62,7 @@ describe('MsaConfigModule', () => {
     const service2: ConfigService<CustomConfig> =
       moduleRef.get<ConfigService<CustomConfig>>(ConfigService);
 
+    expect(service2.get<number>('port')).toBe(1234);
     expect(service2.get('CUSTOM_VAR')).toBeDefined();
     expect(service2.get<string>('CUSTOM_VAR')).toBe('abc');
   });

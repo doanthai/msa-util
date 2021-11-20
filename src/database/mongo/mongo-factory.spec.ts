@@ -1,11 +1,12 @@
 import { ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Test, TestingModule } from '@nestjs/testing';
-import { MsaConfigModule } from '../../config';
+import { DefaultEnvConfig, MongoDBConfig, MsaConfigModule } from '../../config';
 import { mongoFactory } from './index';
 
 describe('MongoDBModule', () => {
   let module: MongooseModule;
+  let service: ConfigService<DefaultEnvConfig>;
 
   beforeEach(async () => {
     const moduleRef: TestingModule = await Test.createTestingModule({
@@ -25,9 +26,24 @@ describe('MongoDBModule', () => {
     }).compile();
 
     module = moduleRef.get<MsaConfigModule>(MsaConfigModule);
+    service = moduleRef.get<ConfigService<DefaultEnvConfig>>(ConfigService);
   });
 
   it('should be defined', async () => {
     expect(module).toBeDefined();
   });
+
+  it('should be read host mongodb', () => {
+    expect(service.get<string>('database.host')).toBe('localhost:27017');
+    const config: MongoDBConfig = service.get<MongoDBConfig>('database');
+    expect(config.host).toBe('localhost:27017');
+    expect(config.user).toBe('');
+    expect(config.password).toBe('');
+    expect(config.name).toBe('msa-user');
+  });
+
+  //
+  // it('connection should be defined', async () => {
+  //   expect(mongoose.connection.readyState).toBe(1);
+  // });
 });
