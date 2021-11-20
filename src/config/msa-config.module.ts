@@ -24,7 +24,6 @@ export class MsaConfigModule {
           options.folder,
           `${options.env || process.env.NODE_ENV}.env`,
         );
-    console.log(envFilePath);
     return {
       module: MsaConfigModule,
       imports: [
