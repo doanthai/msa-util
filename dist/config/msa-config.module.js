@@ -15,8 +15,8 @@ const path = require("path");
 let MsaConfigModule = MsaConfigModule_1 = class MsaConfigModule {
     static register(options) {
         const envFilePath = !options.isShareModule
-            ? path.resolve(__dirname, '../../../..', options.folder, `${options.env || process.env.NODE_ENV}.env`)
-            : path.resolve(__dirname, options.folder, `${options.env || process.env.NODE_ENV}.env`);
+            ? path.resolve(__dirname, '../../../..', options.folder, `${options.env || process.env.NODE_ENV || 'development'}.env`)
+            : path.resolve(__dirname, options.folder, `${options.env || process.env.NODE_ENV || 'development'}.env`);
         return {
             module: MsaConfigModule_1,
             imports: [

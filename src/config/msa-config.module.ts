@@ -6,7 +6,7 @@ import * as path from 'path';
 export interface MsaConfigModuleOptions extends ConfigModuleOptions {
   folder: string;
   isShareModule?: boolean;
-  env: string;
+  env?: string;
 }
 
 @Module({})
@@ -17,12 +17,12 @@ export class MsaConfigModule {
           __dirname,
           '../../../..', // back root dir from node_module
           options.folder,
-          `${options.env || process.env.NODE_ENV}.env`,
+          `${options.env || process.env.NODE_ENV || 'development'}.env`,
         )
       : path.resolve(
           __dirname,
           options.folder,
-          `${options.env || process.env.NODE_ENV}.env`,
+          `${options.env || process.env.NODE_ENV || 'development'}.env`,
         );
     return {
       module: MsaConfigModule,
