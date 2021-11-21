@@ -1,6 +1,5 @@
 import { ConfigService } from '@nestjs/config';
 import { DefaultEnvConfig } from '../../config';
-import { MsaLogger } from '../../log';
-export declare const mongoFactory: (configService: ConfigService<DefaultEnvConfig>, logger: MsaLogger) => Promise<{
+export declare const mongoFactory: (configService: ConfigService<DefaultEnvConfig>) => Promise<{
     uri: string;
 }>;
