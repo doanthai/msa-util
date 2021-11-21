@@ -3,6 +3,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { Test, TestingModule } from '@nestjs/testing';
 import { DefaultEnvConfig, MongoDBConfig, MsaConfigModule } from '../../config';
 import { mongoFactory } from './index';
+import { MsaLogger, MsaLoggerModule } from '../../log';
 
 describe('MongoDBModule', () => {
   let module: MongooseModule;
@@ -18,9 +19,9 @@ describe('MongoDBModule', () => {
           isGlobal: true,
         }),
         MongooseModule.forRootAsync({
-          imports: [MsaConfigModule],
+          imports: [MsaConfigModule, MsaLoggerModule],
           useFactory: mongoFactory,
-          inject: [ConfigService],
+          inject: [ConfigService, MsaLogger],
         }),
       ],
     }).compile();
