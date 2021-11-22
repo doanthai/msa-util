@@ -1,23 +1,25 @@
 import { Injectable, LoggerService } from '@nestjs/common';
-import cluster from 'cluster';
-import * as os from 'os';
+import * as cluster from 'cluster';
+import { cpus } from 'os';
+import { Cluster } from 'cluster';
 
-const numCPUs = os.cpus().length;
+const numCPUs = cpus().length;
+const clt: Cluster = cluster as any as Cluster;
 
 @Injectable()
 export class AppClusterService {
-  static clusteize(logger: LoggerService, callback: () => void): void {
-    if (cluster.isPrimary) {
+  static register(logger: LoggerService, callback: () => void): void {
+    if (clt.isPrimary) {
       logger.log(`Master server started on ${process.pid}`);
       for (let i = 0; i < numCPUs; i++) {
-        cluster.fork();
+        clt.fork();
       }
-      cluster.on('online', (worker) => {
+      clt.on('online', (worker) => {
         logger.log('Worker %s is online', worker.process.pid);
       });
-      cluster.on('exit', (worker) => {
+      clt.on('exit', (worker) => {
         logger.log(`Worker ${worker.process.pid} died. Restarting`);
-        cluster.fork();
+        clt.fork();
       });
     } else {
       logger.log(`Cluster server started on ${process.pid}`);

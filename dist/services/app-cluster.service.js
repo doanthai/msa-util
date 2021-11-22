@@ -8,22 +8,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppClusterService = void 0;
 const common_1 = require("@nestjs/common");
-const cluster_1 = require("cluster");
-const os = require("os");
-const numCPUs = os.cpus().length;
+const cluster = require("cluster");
+const os_1 = require("os");
+const numCPUs = (0, os_1.cpus)().length;
+const clt = cluster;
 let AppClusterService = class AppClusterService {
-    static clusteize(logger, callback) {
-        if (cluster_1.default.isPrimary) {
+    static register(logger, callback) {
+        if (clt.isPrimary) {
             logger.log(`Master server started on ${process.pid}`);
             for (let i = 0; i < numCPUs; i++) {
-                cluster_1.default.fork();
+                clt.fork();
             }
-            cluster_1.default.on('online', (worker) => {
+            clt.on('online', (worker) => {
                 logger.log('Worker %s is online', worker.process.pid);
             });
-            cluster_1.default.on('exit', (worker) => {
+            clt.on('exit', (worker) => {
                 logger.log(`Worker ${worker.process.pid} died. Restarting`);
-                cluster_1.default.fork();
+                clt.fork();
             });
         }
         else {
