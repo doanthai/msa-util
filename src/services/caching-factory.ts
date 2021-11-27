@@ -1,4 +1,5 @@
 import { ConfigService } from '@nestjs/config';
+import * as redisStore from 'cache-manager-redis-store';
 import { DefaultEnvConfig, RedisConfig } from '../config';
 
 export const cachingFactory = (
@@ -6,6 +7,9 @@ export const cachingFactory = (
 ) => {
   const redis: RedisConfig = configService.get<RedisConfig>('redis');
   return {
+    redisStore,
+    host: redis.host,
+    port: redis.port,
     ttl: redis.default_ttl,
     isGlobal: true,
   };
