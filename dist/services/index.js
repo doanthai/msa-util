@@ -11,4 +11,5 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./app-cluster.service"), exports);
+__exportStar(require("./caching-factory"), exports);
 //# sourceMappingURL=index.js.map

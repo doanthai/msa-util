@@ -17,6 +17,7 @@ export interface RedisConfig extends EnvConfig {
   port?: number;
   host?: string;
   cache_key?: string;
+  default_ttl?: number;
   db?: number;
 }
 

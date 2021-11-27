@@ -1,0 +1,1 @@
+{"version":3,"file":"caching-factory.js","sourceRoot":"","sources":["../../src/services/caching-factory.ts"],"names":[],"mappings":";;;AAGO,MAAM,cAAc,GAAG,CAC5B,aAA8C,EAC9C,EAAE;IACF,MAAM,KAAK,GAAgB,aAAa,CAAC,GAAG,CAAc,OAAO,CAAC,CAAC;IACnE,OAAO;QACL,GAAG,EAAE,KAAK,CAAC,WAAW;QACtB,QAAQ,EAAE,IAAI;KACf,CAAC;AACJ,CAAC,CAAC;AARW,QAAA,cAAc,kBAQzB"}

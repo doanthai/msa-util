@@ -31,6 +31,9 @@
     "@nestjs/config": "^1.1.0",
     "@nestjs/core": "^8.0.0",
     "@nestjs/platform-express": "^8.0.0",
+    "cache-manager": "^3.6.0",
+    "cache-manager-redis-store": "^2.0.0",
+    "redis": "^4.0.0",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0"
@@ -38,6 +41,7 @@
   "devDependencies": {
     "@nestjs/mongoose": "^9.0.1",
     "@nestjs/testing": "^8.0.0",
+    "@types/cache-manager": "^3.4.2",
     "@types/jest": "27.0.2",
     "@types/node": "^16.0.0",
     "@types/supertest": "^2.0.11",

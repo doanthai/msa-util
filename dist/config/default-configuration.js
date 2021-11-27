@@ -8,6 +8,7 @@ exports.default = () => {
             port: +process.env.REDIS_PORT || 6379,
             host: process.env.REDIS_HOST || 'localhost',
             cache_key: 'msa-',
+            default_ttl: +process.env.REDIS_DEFAULT_TTL || 120,
             db: 0,
         },
         database: {
