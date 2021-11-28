@@ -6,9 +6,13 @@ import { Cache } from 'cache-manager';
 import { cachingFactory } from './caching-factory';
 import { MsaConfigModule } from '../config';
 
-function doAsync(cb, t) {
-  setTimeout(cb, t);
-}
+const timeout = (ms) => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(true);
+    }, ms);
+  });
+};
 
 describe('CachingService', () => {
   let cacheManage: Cache;
@@ -51,16 +55,12 @@ describe('CachingService', () => {
   });
 
   it('remove cache when time out', async () => {
-    jest.useFakeTimers();
-    await cacheManage.set('keyttl', 'value', { ttl: 5 }); // set timeout 5s
+    await cacheManage.set('keyttl', 'value', { ttl: 1 }); // set timeout 1s
     const value = await cacheManage.get('keyttl');
     expect(value).toBe('value');
 
-    const checkTimeout = async () => {
-      const value = await cacheManage.get('keyttl');
-      expect(value).toBe(null);
-    };
-    doAsync(checkTimeout, 7000);
-    jest.runAllTimers();
+    await timeout(3000);
+    const value2 = await cacheManage.get('keyttl');
+    expect(value2).toBe(null);
   });
 });
