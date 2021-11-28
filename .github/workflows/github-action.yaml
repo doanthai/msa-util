@@ -14,6 +14,7 @@ jobs:
     strategy:
       matrix:
         node-version: [16.x]
+        mongo-version: ['4.4']
     services:
       redis:
         image: redis
@@ -28,9 +29,15 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
+      - name: Start MongoDB
+        uses: supercharge/mongodb-github-action@1.7.0
+        with:
+          mongodb-version: ${{ matrix.mongodb-version }}
+          mongodb-replica-set: test-rs
       - run: yarn install
       - run: yarn test --forceExit
         env:
           REDIS_HOST: redis
+          DATABASE_HOST: test-rs:27017
 
 
