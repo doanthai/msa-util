@@ -14,16 +14,16 @@ describe('AppClusterService', () => {
     }).compile();
 
     service = moduleRef.get<AppClusterService>(AppClusterService);
-    logger = moduleRef.get<MsaLogger>(MsaLogger);
+    // logger = moduleRef.get<MsaLogger>(MsaLogger);
   });
 
   it('should be defined', () => {
     expect(service).toBeDefined();
   });
 
-  it('should be run', () => {
-    AppClusterService.register(logger, () => {
-      console.log('Run main');
-    });
-  });
+  // it('should be run', () => {
+  //   AppClusterService.register(logger, () => {
+  //     console.log('Run main');
+  //   });
+  // });
 });
