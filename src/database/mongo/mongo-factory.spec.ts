@@ -10,28 +10,24 @@ describe('MongoDBModule', () => {
   let service: ConfigService<DefaultEnvConfig>;
 
   beforeEach(async () => {
-    try {
-      const moduleRef: TestingModule = await Test.createTestingModule({
-        imports: [
-          MsaConfigModule.register({
-            folder: '../../env-test',
-            env: 'mongo',
-            isShareModule: true,
-            isGlobal: true,
-          }),
-          MongooseModule.forRootAsync({
-            imports: [MsaConfigModule, MsaLoggerModule],
-            useFactory: mongoFactory,
-            inject: [ConfigService, MsaLogger],
-          }),
-        ],
-      }).compile();
+    const moduleRef: TestingModule = await Test.createTestingModule({
+      imports: [
+        MsaConfigModule.register({
+          folder: '../../env-test',
+          env: 'mongo',
+          isShareModule: true,
+          isGlobal: true,
+        }),
+        MongooseModule.forRootAsync({
+          imports: [MsaConfigModule, MsaLoggerModule],
+          useFactory: mongoFactory,
+          inject: [ConfigService, MsaLogger],
+        }),
+      ],
+    }).compile();
 
-      module = moduleRef.get<MsaConfigModule>(MsaConfigModule);
-      service = moduleRef.get<ConfigService<DefaultEnvConfig>>(ConfigService);
-    } catch (e) {
-      console.log(e);
-    }
+    module = moduleRef.get<MsaConfigModule>(MsaConfigModule);
+    service = moduleRef.get<ConfigService<DefaultEnvConfig>>(ConfigService);
   });
 
   it('should be defined', async () => {
@@ -44,10 +40,9 @@ describe('MongoDBModule', () => {
     expect(config.host).toBe('localhost:27017');
     expect(config.user).toBe('');
     expect(config.password).toBe('');
-    expect(config.name).toBe('msa-user');
+    expect(config.name).toBe('msa');
   });
 
-  //
   // it('connection should be defined', async () => {
   //   expect(mongoose.connection.readyState).toBe(1);
   // });
