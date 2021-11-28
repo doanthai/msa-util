@@ -7,7 +7,7 @@ export const cachingFactory = (
 ) => {
   const redis: RedisConfig = configService.get<RedisConfig>('redis');
   return {
-    redisStore,
+    store: redisStore,
     host: redis.host,
     port: redis.port,
     ttl: redis.default_ttl,
