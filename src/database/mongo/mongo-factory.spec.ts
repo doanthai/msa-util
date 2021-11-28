@@ -10,24 +10,28 @@ describe('MongoDBModule', () => {
   let service: ConfigService<DefaultEnvConfig>;
 
   beforeEach(async () => {
-    const moduleRef: TestingModule = await Test.createTestingModule({
-      imports: [
-        MsaConfigModule.register({
-          folder: '../../env-test',
-          env: 'mongo',
-          isShareModule: true,
-          isGlobal: true,
-        }),
-        MongooseModule.forRootAsync({
-          imports: [MsaConfigModule, MsaLoggerModule],
-          useFactory: mongoFactory,
-          inject: [ConfigService, MsaLogger],
-        }),
-      ],
-    }).compile();
+    try {
+      const moduleRef: TestingModule = await Test.createTestingModule({
+        imports: [
+          MsaConfigModule.register({
+            folder: '../../env-test',
+            env: 'mongo',
+            isShareModule: true,
+            isGlobal: true,
+          }),
+          MongooseModule.forRootAsync({
+            imports: [MsaConfigModule, MsaLoggerModule],
+            useFactory: mongoFactory,
+            inject: [ConfigService, MsaLogger],
+          }),
+        ],
+      }).compile();
 
-    module = moduleRef.get<MsaConfigModule>(MsaConfigModule);
-    service = moduleRef.get<ConfigService<DefaultEnvConfig>>(ConfigService);
+      module = moduleRef.get<MsaConfigModule>(MsaConfigModule);
+      service = moduleRef.get<ConfigService<DefaultEnvConfig>>(ConfigService);
+    } catch (e) {
+      console.log(e);
+    }
   });
 
   it('should be defined', async () => {
