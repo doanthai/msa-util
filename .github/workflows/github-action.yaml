@@ -14,7 +14,7 @@ jobs:
     strategy:
       matrix:
         node-version: [16.x]
-        mongo-version: ['4.4']
+        mongodb-version: ['4.4']
     services:
       redis:
         image: redis
