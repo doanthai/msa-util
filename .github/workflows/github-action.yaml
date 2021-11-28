@@ -38,6 +38,6 @@ jobs:
       - run: yarn test --forceExit
         env:
           REDIS_HOST: redis
-          DATABASE_HOST: test-rs:27017
+          DATABASE_HOST: localhost:27017
 
 
