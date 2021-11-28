@@ -10,10 +10,23 @@ on:
 jobs:
   test_job:
     runs-on: ubuntu-20.04
-    container: node:16.13.0-alpine3.14
+    strategy:
+      matrix:
+        node-version: [16.x]
+        mongodb-version: ['4.2', '4.4']
     steps:
       - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Start MongoDB
+        uses: supercharge/mongodb-github-action@1.7.0
+        with:
+          mongodb-version: ${{ matrix.mongodb-version }}
       - run: yarn install
       - run: yarn test
+        env:
+          CI: true
 
 
