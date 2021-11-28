@@ -6,6 +6,10 @@ import { Cache } from 'cache-manager';
 import { cachingFactory } from './caching-factory';
 import { MsaConfigModule } from '../config';
 
+function doAsync(cb, t) {
+  setTimeout(cb, t);
+}
+
 describe('CachingService', () => {
   let cacheManage: Cache;
 
@@ -51,11 +55,12 @@ describe('CachingService', () => {
     await cacheManage.set('keyttl', 'value', { ttl: 5 }); // set timeout 5s
     const value = await cacheManage.get('keyttl');
     expect(value).toBe('value');
-    await setTimeout(async () => {
+
+    const checkTimeout = async () => {
       const value = await cacheManage.get('keyttl');
-      console.log(value);
       expect(value).toBe(null);
-    }, 7000);
+    };
+    doAsync(checkTimeout, 7000);
     jest.runAllTimers();
   });
 });
