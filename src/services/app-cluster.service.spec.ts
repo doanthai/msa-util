@@ -21,9 +21,9 @@ describe('AppClusterService', () => {
     expect(service).toBeDefined();
   });
 
-  // it('should be run', () => {
-  //   AppClusterService.register(logger, () => {
-  //     console.log('Run main');
-  //   });
-  // });
+  it('should be run', () => {
+    AppClusterService.register(logger, () => {
+      console.log('Run main');
+    });
+  });
 });
