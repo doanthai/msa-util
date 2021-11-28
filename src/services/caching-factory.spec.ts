@@ -43,7 +43,7 @@ describe('CachingService', () => {
     await cacheManage.set('keyc', 'value');
     await cacheManage.del('keyc');
     const value = await cacheManage.get('keyc');
-    expect(value).toBe(undefined);
+    expect(value).toBe(null);
   });
 
   it('remove cache when time out', async () => {
@@ -54,7 +54,7 @@ describe('CachingService', () => {
     await setTimeout(async () => {
       const value = await cacheManage.get('keyttl');
       console.log(value);
-      expect(value).toBe(undefined);
+      expect(value).toBe(null);
     }, 7000);
     jest.runAllTimers();
   });
